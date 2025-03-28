@@ -211,7 +211,7 @@ namespace mJoystick {
      */
     //% group="Battery"
     //% weight=100
-    //% block="read 4 AA batteries(P2)"
+    //% block="read 4 AA batteries"
     export function batteryLevel(): number {
         let batLevel = pins.analogReadPin(AnalogPin.P2);
         if (batLevel > 310) {  // 310=6V/6/0.0032226, 100%
