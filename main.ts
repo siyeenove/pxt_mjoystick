@@ -5,9 +5,9 @@
 //% weight=11 color=#008C8C block="mJoystick" blockId="mJoystick" icon="\uf085"
 namespace mJoystick {
     export enum Axle{
-        //%block="X-axle"
+        //%block="x-axle"
         X = 0,
-        //%block="Y-axle"
+        //%block="y-axle"
         Y = 1
     }
 
@@ -30,13 +30,13 @@ namespace mJoystick {
     }
 
     export enum Servo {
-        //%block="Servo-1"
+        //%block="servo-1"
         Servo1 = 1,
-        //%block="Servo-2"
+        //%block="servo-2"
         Servo2 = 2,
-        //%block="Servo-3"
+        //%block="servo-3"
         Servo3 = 3,
-        //%block="Servo-4"
+        //%block="servo-4"
         Servo4 = 4
     }
 
