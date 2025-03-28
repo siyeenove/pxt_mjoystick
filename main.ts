@@ -5,20 +5,20 @@
 //% weight=11 color=#008C8C block="mJoystick" blockId="mJoystick" icon="\uf085"
 namespace mJoystick {
     export enum Axle{
-        //%block="X-axle(P0)"
+        //%block="X-axle"
         X = 0,
-        //%block="Y-axle(P1)"
+        //%block="Y-axle"
         Y = 1
     }
 
     export enum Button {
-        //%block="A(P5)"
+        //%block="A"
         A = 0,
-        //%block="B(P11)"
+        //%block="B"
         B = 1,
-        //%block="C(P12)"
+        //%block="C"
         C = 2,
-        //%block="D(P8)"
+        //%block="D"
         D = 3
     }
 
@@ -29,11 +29,24 @@ namespace mJoystick {
         OFF = 0
     }
 
+    export enum Servo {
+        //%block="Servo-1"
+        Servo1 = 1,
+        //%block="Servo-2"
+        Servo2 = 2,
+        //%block="Servo-3"
+        Servo3 = 3,
+        //%block="Servo-4"
+        Servo4 = 4
+    }
+
     /**
-      * This function runs in the background all the time to read the value 
-      * of button
-      */
-    //% group="mJoystick"
+     * This function runs in the background all the time to read the value 
+     * of button. 
+     * P5 is used for button A.  P11 is used for button B.
+     * P12 is used for button C. P8 is used for button D.
+     */
+    //% group="Button"
     //% weight=140
     //% block="on button %button pressed"
     export function buttonCallBack(button: Button, handler: () => void) {
@@ -47,16 +60,16 @@ namespace mJoystick {
 
         //A trigger event is registered, and handler is the function to execute to trigger the event.
         if (button == Button.A)
-            control.onEvent(98, 3500, handler)
+            control.onEvent(98, 3500, handler);
         if (button == Button.B)
-            control.onEvent(97, 3500, handler)
+            control.onEvent(97, 3500, handler);
         if (button == Button.C){
-            control.onEvent(96, 3500, handler)
-            pins.setPull(DigitalPin.P12, PinPullMode.PullUp)
+            control.onEvent(96, 3500, handler);
+            pins.setPull(DigitalPin.P12, PinPullMode.PullUp);
         }
         if (button == Button.D){
-            control.onEvent(95, 3500, handler)
-            pins.setPull(DigitalPin.P8, PinPullMode.PullUp)
+            control.onEvent(95, 3500, handler);
+            pins.setPull(DigitalPin.P8, PinPullMode.PullUp);
         }
 
         control.inBackground(() => {
@@ -64,7 +77,7 @@ namespace mJoystick {
                 if (button == Button.A) {
                     if ((pins.digitalReadPin(DigitalPin.P5) == 0) && (isPressedA == false)){
                         //Fires the event registered above（control.onEvent（））
-                        control.raiseEvent(98, 3500, EventCreationMode.CreateAndFire)
+                        control.raiseEvent(98, 3500, EventCreationMode.CreateAndFire);
                         isPressedA = true;
                     }
                     if (pins.digitalReadPin(DigitalPin.P5) == 1) {
@@ -74,7 +87,7 @@ namespace mJoystick {
                 if (button == Button.B) {
                     if ((pins.digitalReadPin(DigitalPin.P11) == 0) && (isPressedB == false)) {
                         //Fires the event registered above（control.onEvent（））
-                        control.raiseEvent(97, 3500, EventCreationMode.CreateAndFire)
+                        control.raiseEvent(97, 3500, EventCreationMode.CreateAndFire);
                         isPressedB = true;
                     }
                     if (pins.digitalReadPin(DigitalPin.P11) == 1) {
@@ -84,7 +97,7 @@ namespace mJoystick {
                 if (button == Button.C) {
                     if ((pins.digitalReadPin(DigitalPin.P12) == 0) && (isPressedC == false)) {
                         //Fires the event registered above（control.onEvent（））
-                        control.raiseEvent(96, 3500, EventCreationMode.CreateAndFire)
+                        control.raiseEvent(96, 3500, EventCreationMode.CreateAndFire);
                         isPressedC = true;
                     }
                     if (pins.digitalReadPin(DigitalPin.P12) == 1) {
@@ -94,23 +107,25 @@ namespace mJoystick {
                 if (button == Button.D) {
                     if ((pins.digitalReadPin(DigitalPin.P8) == 0) && (isPressedD == false)) {
                         //Fires the event registered above（control.onEvent（））
-                        control.raiseEvent(95, 3500, EventCreationMode.CreateAndFire)
+                        control.raiseEvent(95, 3500, EventCreationMode.CreateAndFire);
                         isPressedD = true;
                     }
                     if (pins.digitalReadPin(DigitalPin.P8) == 1) {
                         isPressedD = false;
                     }
                 }
-                basic.pause(20)
+                basic.pause(20);
             }
         })
     }
 
     /**
      * Read mJoystick button values.
-     * Return value: -100 -- +100
+     * P5 is used for button A.  P11 is used for button B.
+     * P12 is used for button C. P8 is used for button D.
+     * Return 0 or 1
      */
-    //% group="mJoystick"
+    //% group="Button"
     //% block="digital read button %button"
     //% weight=130
     export function buttonValue(button: Button): number {
@@ -132,9 +147,11 @@ namespace mJoystick {
 
     /**
      * Determine whether a button is pressed.
-     * Return value: -100 -- +100
+     * P5 is used for button A.  P11 is used for button B.
+     * P12 is used for button C. P8 is used for button D.
+     * Return true or false
      */
-    //% group="mJoystick"
+    //% group="Button"
     //% block="button %button is pressed"
     //% weight=130
     export function buttonIsPressed(button: Button): boolean {
@@ -155,10 +172,11 @@ namespace mJoystick {
     }
 
     /**
-     * Read mJoystick X and Y axis values.
+     * Read the X-axis and Y-axis values of the joystick. 
+     * P0 is used for X-axis.  P1 is used for Y-axis.
      * Return value: -100 -- +100
      */
-    //% group="mJoystick"
+    //% group="Joystick"
     //% block="read %axle"
     //% weight=120
     export function joystickValue(axle: Axle): number {
@@ -168,30 +186,30 @@ namespace mJoystick {
         }else{
             value = pins.analogReadPin(AnalogPin.P1);
         }
-        value = Math.map(value, -100, 100, 0, 1023)
+        value = Math.map(value, -100, 100, 0, 1023);
         return value;
     }
 
     /**
-     * Turn on or off the vibration motor.
+     * Turn on or off the vibration motor, which uses P2.
      * @param state - ON or OFF.
      */
-    //% group="mJoystick"
+    //% group="Vibration motor"
     //% weight=110
-    //% block="vibration motor(P2) %state"
+    //% block="set vibration motor %state"
     export function vibrationMotor(state: MotorState): void {
         if(state == MotorState.ON){
-            pins.digitalWritePin(DigitalPin.P2, 1)
+            pins.digitalWritePin(DigitalPin.P2, 1);
         }else{
-            pins.digitalWritePin(DigitalPin.P2, 0)
+            pins.digitalWritePin(DigitalPin.P2, 0);
         }
     }
 
     /**
-     * Read the battery voltage level.
-     * Return 0--100
+     * To read the battery voltage level, it uses P2.
+     * Return 0--100%
      */
-    //% group="mJoystick"
+    //% group="Battery"
     //% weight=100
     //% block="read 4 AA batteries(P2)"
     export function batteryLevel(): number {
@@ -202,7 +220,32 @@ namespace mJoystick {
         if (batLevel < 232) {  // 232=4.5V/6/0.0032226, 0%
             batLevel = 232;  
         }
-        batLevel = Math.map(batLevel, 0, 100, 232, 310)
+        batLevel = Math.map(batLevel, 0, 100, 232, 310);
         return batLevel;
+    }
+
+    /**
+     * Set the steering gear Angle.
+     * P13 is used for servo-1. P14 is used for servo-1.
+     * P15 is used for servo-1. P16 is used for servo-1.
+     */
+    //% group="Servo"
+    //% weight=100
+    //% block="set %servo to %angle °"
+    //% angle.min=0 angle.max=180
+    //% angle.defl=0
+    export function servo(servo : Servo, angle : number): void {
+        if(servo == Servo.Servo1){
+            pins.servoWritePin(AnalogPin.P13, angle)
+        }
+        if (servo == Servo.Servo2) {
+            pins.servoWritePin(AnalogPin.P14, angle)
+        }
+        if (servo == Servo.Servo3) {
+            pins.servoWritePin(AnalogPin.P15, angle)
+        }
+        if (servo == Servo.Servo4) {
+            pins.servoWritePin(AnalogPin.P16, angle)
+        }
     }
 }
