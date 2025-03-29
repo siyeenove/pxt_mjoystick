@@ -1,7 +1,7 @@
 {
-    "name": "pxt-mjoystick",
-    "version": "0.0.0",
-    "description": "",
+    "name": "pxt_mjoystick",
+    "version": "1.0.0",
+    "description": "mJoystick designed by Siyeenove",
     "dependencies": {
         "core": "*",
         "radio": "*",
