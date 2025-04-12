@@ -40,6 +40,13 @@ namespace mJoystick {
         Servo4 = 4
     }
 
+    function buttonPullUp(){
+        pins.setPull(DigitalPin.P5, PinPullMode.PullUp);    // A
+        pins.setPull(DigitalPin.P11, PinPullMode.PullUp);   // B
+        pins.setPull(DigitalPin.P12, PinPullMode.PullUp);   // C
+        pins.setPull(DigitalPin.P8, PinPullMode.PullUp);    // D
+    }
+
     /**
      * This function runs in the background all the time to read the value 
      * of button. 
@@ -58,20 +65,18 @@ namespace mJoystick {
         let isPressedC = false;
         let isPressedD = false;
 
+        buttonPullUp();
+
         //A trigger event is registered, and handler is the function to execute to trigger the event.
         if (button == Button.A)
             control.onEvent(98, 3500, handler);
         if (button == Button.B)
             control.onEvent(97, 3500, handler);
-        if (button == Button.C){
+        if (button == Button.C)
             control.onEvent(96, 3500, handler);
-            pins.setPull(DigitalPin.P12, PinPullMode.PullUp);
-        }
-        if (button == Button.D){
+        if (button == Button.D)
             control.onEvent(95, 3500, handler);
-            pins.setPull(DigitalPin.P8, PinPullMode.PullUp);
-        }
-
+        
         control.inBackground(() => {
             while (true) {
                 if (button == Button.A) {
@@ -130,6 +135,7 @@ namespace mJoystick {
     //% weight=130
     export function buttonValue(button: Button): number {
         let value = 0;
+        buttonPullUp();
         if (button == Button.A) {
             value = pins.digitalReadPin(DigitalPin.P5);
         } 
@@ -156,6 +162,7 @@ namespace mJoystick {
     //% weight=130
     export function buttonIsPressed(button: Button): boolean {
         let value = 0;
+        buttonPullUp();
         if (button == Button.A) {
             value = pins.digitalReadPin(DigitalPin.P5);
         }
