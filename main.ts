@@ -188,15 +188,17 @@ namespace mJoystick {
     //% weight=120
     export function joystickValue(axle: Axle): number {
         let value = 0;
-        if(axle = Axle.X){
-            value = pins.analogReadPin(AnalogPin.P0);
-        }else{
+        if (axle == Axle.X){
             value = pins.analogReadPin(AnalogPin.P1);
+            value = Math.map(value, 0, 1023, 100, -100);
         }
-        value = Math.map(value, -100, 100, 0, 1023);
-        return value;
+        if (axle == Axle.Y){
+            value = pins.analogReadPin(AnalogPin.P0);
+            value = Math.map(value, 0, 1023, 100, -100);
+        }
+        return Math.round(value);
     }
-
+ 
     /**
      * Turn on or off the vibration motor, which uses P2.
      * @param state - ON or OFF.
@@ -228,7 +230,7 @@ namespace mJoystick {
             batLevel = 232;  
         }
         batLevel = Math.map(batLevel, 232, 310, 0, 100);
-        return batLevel;
+        return Math.round(batLevel);
     }
 
     /**
