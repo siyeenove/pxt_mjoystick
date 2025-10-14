@@ -2,7 +2,7 @@
 * This extension library was developed by the SIYEENOVE team.
 * Date: March 28, 2022  
 */
-//% weight=11 color=#008C8C block="mJoystick" blockId="mJoystick" icon="\uf085"
+//% weight=11 color=#00B0FF block="mJoystick" blockId="mJoystick" icon="\uf085"
 namespace mJoystick {
     export enum Axle{
         //%block="x-axle"
