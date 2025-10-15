@@ -235,8 +235,8 @@ namespace mJoystick {
 
     /**
      * Set the steering gear Angle.
-     * P13 is used for servo-1. P14 is used for servo-1.
-     * P15 is used for servo-1. P16 is used for servo-1.
+     * P13 is used for servo1. P14 is used for servo2.
+     * P15 is used for servo3. P16 is used for servo4.
      */
     //% group="Servo"
     //% weight=100
