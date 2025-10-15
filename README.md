@@ -1,6 +1,6 @@
 # Siyeenove mJoystick Package
 
-![](/image.jpg/)
+![](/image.png/)
 
 > Open this page at [https://siyeenove.github.io/pxt-mjoystick/](https://siyeenove.github.io/pxt-mjoystick/)    
 
