@@ -1,24 +1,72 @@
+# Siyeenove mJoystick Package
 
-> Open this page at [https://siyeenove.github.io/pxt-mjoystick/](https://siyeenove.github.io/pxt-mjoystick/)
+![](/image.jpg/)
 
-## Use as Extension
+> Open this page at [https://siyeenove.github.io/pxt-mjoystick/](https://siyeenove.github.io/pxt-mjoystick/)    
 
-This repository can be added as an **extension** in MakeCode.
+This library is designed to drive mJoystick, You can get mjoystick:   
+   
+[SIYEENOVE](https://siyeenove.com/buy/)   
 
-* open [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* click on **New Project**
-* click on **Extensions** under the gearwheel menu
-* search for **https://github.com/siyeenove/pxt-mjoystick** and import
+Product Tutorial: 
 
-## Edit this project
+[SIYEENOVE](https://siyeenove.com/tutorial/)    
 
-To edit this repository in MakeCode.
+## Code Example   
 
-* open [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* click on **Import** then click on **Import URL**
-* paste **https://github.com/siyeenove/pxt-mjoystick** and click import
+```JavaScript
+mJoystick.buttonCallBack(mJoystick.Button.D, function () {
+    if (mJoystick.buttonIsPressed(mJoystick.Button.D)) {
+        basic.showNumber(mJoystick.buttonValue(mJoystick.Button.D))
+        basic.pause(1000)
+    }
+})
+mJoystick.buttonCallBack(mJoystick.Button.C, function () {
+    if (mJoystick.buttonIsPressed(mJoystick.Button.C)) {
+        basic.showNumber(mJoystick.buttonValue(mJoystick.Button.C))
+        basic.pause(1000)
+    }
+})
+mJoystick.buttonCallBack(mJoystick.Button.B, function () {
+    if (mJoystick.buttonIsPressed(mJoystick.Button.B)) {
+        basic.showNumber(mJoystick.buttonValue(mJoystick.Button.B))
+        basic.pause(1000)
+    }
+})
+mJoystick.buttonCallBack(mJoystick.Button.A, function () {
+    if (mJoystick.buttonIsPressed(mJoystick.Button.A)) {
+        basic.showNumber(mJoystick.buttonValue(mJoystick.Button.A))
+        basic.pause(1000)
+    }
+})
+basic.forever(function () {
+    basic.showNumber(mJoystick.joystickValue(mJoystick.Axle.X))
+    basic.pause(1000)
+    basic.showNumber(mJoystick.joystickValue(mJoystick.Axle.Y))
+    basic.pause(1000)
+    basic.showNumber(mJoystick.batteryLevel())
+    basic.pause(1000)
+    mJoystick.vibrationMotor(mJoystick.MotorState.ON)
+    basic.pause(1000)
+    mJoystick.vibrationMotor(mJoystick.MotorState.OFF)
+    basic.pause(1000)
+    mJoystick.servo(mJoystick.Servo.Servo1, 0)
+    mJoystick.servo(mJoystick.Servo.Servo2, 0)
+    mJoystick.servo(mJoystick.Servo.Servo3, 0)
+    mJoystick.servo(mJoystick.Servo.Servo4, 0)
+    basic.pause(1000)
+    mJoystick.servo(mJoystick.Servo.Servo1, 180)
+    mJoystick.servo(mJoystick.Servo.Servo2, 180)
+    mJoystick.servo(mJoystick.Servo.Servo3, 180)
+    mJoystick.servo(mJoystick.Servo.Servo4, 180)
+    basic.pause(1000)
+})
+```
 
-#### Metadata (used for search, rendering)
+## Supported targets   
 
-* for PXT/microbit
-<script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
+* for PXT/microbit   
+
+## License
+
+* MIT   
