@@ -37,7 +37,9 @@ namespace mJoystick {
         //%block="servo-3"
         Servo3 = 3,
         //%block="servo-4"
-        Servo4 = 4
+        Servo4 = 4,
+        //%block="all servos"
+        AllServo = 5
     }
 
     function buttonPullUp(){
@@ -244,16 +246,16 @@ namespace mJoystick {
     //% angle.min=0 angle.max=180
     //% angle.defl=0
     export function servo(servo : Servo, angle : number): void {
-        if(servo == Servo.Servo1){
+        if (servo == Servo.Servo1 || servo == Servo.AllServo){
             pins.servoWritePin(AnalogPin.P13, angle)
         }
-        if (servo == Servo.Servo2) {
+        if (servo == Servo.Servo2 || servo == Servo.AllServo) {
             pins.servoWritePin(AnalogPin.P14, angle)
         }
-        if (servo == Servo.Servo3) {
+        if (servo == Servo.Servo3 || servo == Servo.AllServo) {
             pins.servoWritePin(AnalogPin.P15, angle)
         }
-        if (servo == Servo.Servo4) {
+        if (servo == Servo.Servo4 || servo == Servo.AllServo) {
             pins.servoWritePin(AnalogPin.P16, angle)
         }
     }
