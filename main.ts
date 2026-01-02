@@ -236,12 +236,12 @@ namespace mJoystick {
     }
 
     /**
-     * Set the steering gear Angle.
+     * Set the servo Angle.
      * P13 is used for servo1. P14 is used for servo2.
      * P15 is used for servo3. P16 is used for servo4.
      */
     //% group="Servo"
-    //% weight=100
+    //% weight=90
     //% block="set %servo to %angle °"
     //% angle.min=0 angle.max=180
     //% angle.defl=0
@@ -257,6 +257,30 @@ namespace mJoystick {
         }
         if (servo == Servo.Servo4 || servo == Servo.AllServo) {
             pins.servoWritePin(AnalogPin.P16, angle)
+        }
+    }
+
+    /**
+     * Set the servo pulse.
+     * P13 is used for servo1. P14 is used for servo2.
+     * P15 is used for servo3. P16 is used for servo4.
+     */
+    //% group="Servo"
+    //% weight=89
+    //% block="set %servo pulse to(us) %us"
+    //% us.defl=0
+    export function servoPluse(servo: Servo, us: number): void {
+        if (servo == Servo.Servo1 || servo == Servo.AllServo) {
+            pins.servoSetPulse(AnalogPin.P13, us)
+        }
+        if (servo == Servo.Servo2 || servo == Servo.AllServo) {
+            pins.servoSetPulse(AnalogPin.P14, us)
+        }
+        if (servo == Servo.Servo3 || servo == Servo.AllServo) {
+            pins.servoSetPulse(AnalogPin.P15, us)
+        }
+        if (servo == Servo.Servo4 || servo == Servo.AllServo) {
+            pins.servoSetPulse(AnalogPin.P16, us)
         }
     }
 }
